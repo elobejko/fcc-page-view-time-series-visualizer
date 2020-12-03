@@ -5,22 +5,22 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
-df = None
+df = pd.read_csv("fcc-forum-pageviews.csv", index_col = 'date')
 
 # Clean data
-df = None
+#df = None
 
 
 def draw_line_plot():
     # Draw line plot
 
-
+  print(df.head())
 
 
 
     # Save image and return fig (don't change this part)
-    fig.savefig('line_plot.png')
-    return fig
+    #fig.savefig('line_plot.png')
+    #return fig
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
@@ -33,8 +33,8 @@ def draw_bar_plot():
 
 
     # Save image and return fig (don't change this part)
-    fig.savefig('bar_plot.png')
-    return fig
+   # fig.savefig('bar_plot.png')
+    #return fig
 
 def draw_box_plot():
     # Prepare data for box plots (this part is done!)
@@ -50,5 +50,5 @@ def draw_box_plot():
 
 
     # Save image and return fig (don't change this part)
-    fig.savefig('box_plot.png')
-    return fig
+    #fig.savefig('box_plot.png')
+    #return fig
