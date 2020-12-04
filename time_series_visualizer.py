@@ -5,27 +5,32 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
-df = pd.read_csv("fcc-forum-pageviews.csv", index_col = 'date')
+df = pd.read_csv("fcc-forum-pageviews.csv", index_col = 'date', parse_dates = True)
 
 # Clean data
-#df = None
+df = df.loc[(df['value'] >= df['value'].quantile(0.025)) & (df['value'] <= df['value'].quantile(0.975) )]
 
 
 def draw_line_plot():
     # Draw line plot
 
-  print(df.head())
-
-
-
-    # Save image and return fig (don't change this part)
-    #fig.savefig('line_plot.png')
-    #return fig
+  fig, ax = plt.subplots(figsize = (12, 5)) 
+  plt.plot(df, color = 'red')
+  plt.xlabel('Date')
+  plt.ylabel('Page Views')
+  plt.title('Daily freeCodeCamp Forum Page Views 5/2016-12/2019')
+  
+  # Save image and return fig (don't change this part)
+  fig.savefig('line_plot.png')
+  return fig
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
-    df_bar = None
-
+    df_bar = df.copy()
+    print(df_bar.head())
+    #df_bar['year'] = [d.year for d in df_bar['date']]
+    #df_bar['month'] = [d.strftime('%b') for d in df_bar.date]
+    #print(df_bar.head())
     # Draw bar plot
 
 
