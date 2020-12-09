@@ -26,20 +26,33 @@ def draw_line_plot():
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
-    df_bar = df.copy()
-    df_bar.reset_index(inplace = True)
-    df_bar['year'] = [d.year for d in df_bar.date]
-    df_bar['month'] = [d.strftime('%b') for d in df_bar.date]
-    
-    tmp = pd.DataFrame()
+    df.reset_index(inplace = True)
+    #df["month"] = df.index.month
+    #df["year"] = df.index.year
+    df_bar = pd.DataFrame()
+   # 
+    df_bar['year'] = [d.year for d in df.date]
+    df_bar['month'] = [d.strftime('%b') for d in df.date]
+    df_bar['value'] = df['value']
+    df_bar = df_bar.groupby(['year', 'month'])['value'].mean()
+    df_bar = df_bar.reset_index(level=['year','month'])
+    print(df_bar.info())  
     print(df_bar.head())
+    
+  
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     # Draw bar plot
-    #fig, ax = df_bar.plot.bar(x = 'year', y = 'value')
-    
+
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax = sns.barplot(x = 'year', y = 'value', hue = 'month', data = df_bar)
+    ax.set(xlabel='Years', ylabel = 'Average Page Views')
+    #ax.legend(months)
+    fig = ax.get_figure()
+     
     # Save image and return fig (don't change this part)
-   # fig.savefig('bar_plot.png')
-   # return fig
+    fig.savefig('bar_plot.png')
+    return fig
 
 def draw_box_plot():
     # Prepare data for box plots (this part is done!)
