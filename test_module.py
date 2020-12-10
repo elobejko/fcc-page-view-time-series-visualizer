@@ -31,7 +31,7 @@ class LinePlotTestCase(unittest.TestCase):
         expected = 1238
         self.assertEqual(actual, expected, "Expected number of data points in line plot to be 1238.")
 
-'''
+
 class BarPlotTestCase(unittest.TestCase):
     def setUp(self):
         self.fig = time_series_visualizer.draw_bar_plot()
@@ -62,7 +62,7 @@ class BarPlotTestCase(unittest.TestCase):
         expected = 49
         self.assertEqual(actual, expected, "Expected a different number of bars in bar chart.")
 
-
+''''
 class BoxPlotTestCase(unittest.TestCase):
     def setUp(self):
         self.fig = time_series_visualizer.draw_box_plot()

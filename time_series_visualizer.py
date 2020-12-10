@@ -26,28 +26,23 @@ def draw_line_plot():
 
 def draw_bar_plot():
     # Copy and modify data for monthly bar plot
-    df.reset_index(inplace = True)
-    #df["month"] = df.index.month
-    #df["year"] = df.index.year
+    tmp = df.copy()
+    tmp.reset_index(inplace = True)
     df_bar = pd.DataFrame()
-   # 
-    df_bar['year'] = [d.year for d in df.date]
-    df_bar['month'] = [d.strftime('%b') for d in df.date]
-    df_bar['value'] = df['value']
+    df_bar['year'] = [d.year for d in tmp.date]
+    df_bar['month'] = [d.strftime('%B') for d in tmp.date]
+    df_bar['value'] = tmp['value']
     df_bar = df_bar.groupby(['year', 'month'])['value'].mean()
     df_bar = df_bar.reset_index(level=['year','month'])
-    print(df_bar.info())  
-    print(df_bar.head())
-    
   
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     # Draw bar plot
 
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax = sns.barplot(x = 'year', y = 'value', hue = 'month', data = df_bar)
+    fig, ax = plt.subplots(figsize=(8,8))
+    ax = sns.barplot(x = 'year', y = 'value', hue = 'month', hue_order = months, data = df_bar, palette = 'dark')
     ax.set(xlabel='Years', ylabel = 'Average Page Views')
-    #ax.legend(months)
+    ax.legend(loc='upper left', title ='Months')
     fig = ax.get_figure()
      
     # Save image and return fig (don't change this part)
@@ -62,7 +57,7 @@ def draw_box_plot():
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
 
     # Draw box plots (using Seaborn)
-
+    fig, ax = plt.subplots(figsize=(8,8))
 
 
 
