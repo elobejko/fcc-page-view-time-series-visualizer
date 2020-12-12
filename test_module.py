@@ -62,7 +62,7 @@ class BarPlotTestCase(unittest.TestCase):
         expected = 49
         self.assertEqual(actual, expected, "Expected a different number of bars in bar chart.")
 
-''''
+
 class BoxPlotTestCase(unittest.TestCase):
     def setUp(self):
         self.fig = time_series_visualizer.draw_box_plot()
@@ -118,6 +118,6 @@ class BoxPlotTestCase(unittest.TestCase):
         actual = len(self.ax2.lines) / 6 # Every box has 6 lines
         expected = 12
         self.assertEqual(actual, expected, "Expected 12 boxes in box plot 2")
-'''
+
 if __name__ == "__main__":
     unittest.main()
